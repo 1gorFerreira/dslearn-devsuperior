@@ -22,3 +22,7 @@ INSERT INTO tb_resource (title, description, position, img_Uri, type, offer_id) 
 INSERT INTO tb_resource (title, description, position, img_Uri, type, offer_id) VALUES ('Forum', 'Tire suas dúvidas', 2, 'https://cdn.pixabay.com/photo/2021/03/18/17/09/teacher-6105336_960_720.png', 2, 1);
 INSERT INTO tb_resource (title, description, position, img_Uri, type, offer_id) VALUES ('Lives', 'Lives exclusivas para a turma', 3, 'https://cdn.pixabay.com/photo/2021/03/18/17/09/teacher-6105336_960_720.png', 0, 1);
 
+INSERT INTO tb_section (title, description, position, img_Uri, resource_id, prerequisite_id) VALUES ('Capitulo 1', 'Este capitulo vamos começar!', 1, 'https://cdn.pixabay.com/photo/2021/03/18/17/09/teacher-6105336_960_720.png', 1, null);
+INSERT INTO tb_section (title, description, position, img_Uri, resource_id, prerequisite_id) VALUES ('Capitulo 2', 'Este capitulo vamos continuar!', 2, 'https://cdn.pixabay.com/photo/2021/03/18/17/09/teacher-6105336_960_720.png', 1, 1);
+INSERT INTO tb_section (title, description, position, img_Uri, resource_id, prerequisite_id) VALUES ('Capitulo 3', 'Este capitulo vamos finalizar!', 3, 'https://cdn.pixabay.com/photo/2021/03/18/17/09/teacher-6105336_960_720.png', 1, 2);
+
