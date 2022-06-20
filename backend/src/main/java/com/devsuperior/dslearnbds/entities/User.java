@@ -146,6 +146,15 @@ public class User implements UserDetails, Serializable{
 			return true;
 		}
 		
-
+		//Método para auxiliar a AuthService;
+		public boolean hasAdmin(String roleName) {
+			for(Role role : roles) {
+				if(role.getAuthority().equals(roleName)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 	}
 
