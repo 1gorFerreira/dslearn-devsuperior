@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -50,6 +51,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private JwtTokenEnhancer tokenEnhancer;
 	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -62,8 +66,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.withClient(clientId) //Para definir o clientId; Quando nossa aplicação for acessar o backend, ela vai ter que informar o nome dela (que é dscatalog);
 		.secret(passwordEncoder.encode(clientSecret)) //Para definir o client secret (Senha da aplicação, não do usuário);
 		.scopes("read", "write") //Para dizer que será um acesso de leitura, escrita, etc;
-		.authorizedGrantTypes("password") //Tipos de acesso para login (Password, etc etc);
-		.accessTokenValiditySeconds(jwtDuration); //Tempo de expiração do token;
+		.authorizedGrantTypes("password", "refresh_token") //Tipos de acesso para login (Password, etc etc);
+		.accessTokenValiditySeconds(jwtDuration) //Tempo de expiração do token;
+		.refreshTokenValiditySeconds(jwtDuration);//Tempo de expiração do refresh_token;
 	}
 
 	//AuthorizationServerEndpointsConfigurer -> Configuração que dirá quem irá autorizar e qual vai ser o formato do token;
@@ -77,8 +82,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		endpoints.authenticationManager(authenticationManager) //Quem vai processar/autorizar a autenticação? SPRINGSECURITY usando o authenticationManager;
 		.tokenStore(tokenStore) //Quais vão ser os objetos responsáveis por processar os tokens? tokenStore;
 		.accessTokenConverter(accessTokenConverter)
-		.tokenEnhancer(chain);//Aplicando a Enhancer;
-		
+		.tokenEnhancer(chain)//Aplicando a Enhancer;
+		.userDetailsService(userDetailsService);//Acrescentado após a adição do refresh Token;
 	}
 	
 }
