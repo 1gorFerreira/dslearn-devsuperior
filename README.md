@@ -59,3 +59,5 @@ https://www.figma.com/file/p8Hawp1w5g0pCZ3h3ZsCUd/DSLearn-Bootcamp
 
 Igor Ferreira Daniel
 
+Linkedin: https://www.linkedin.com/in/igor-ferreira-366a44234/
+
